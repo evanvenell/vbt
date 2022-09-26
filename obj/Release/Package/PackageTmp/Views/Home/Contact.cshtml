@@ -1,0 +1,87 @@
+﻿@model BugTrackerApplication.ViewModels.ContactFormViewModel
+
+@{
+    ViewBag.Title = "Contact-us";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Contact Us</h1>
+                <h5 class="m-0 text-dark" style="padding-top: 20px;">@ViewBag.Message</h5>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home/Index">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Contact Us</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+        <!-- Row Spacer -->
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <!-- Whitespace Empty Area TEST -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div class="content">
+    <div class="card">
+        <div class="card-body row">
+            <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                <div>
+                    <h2>Venell <strong>Bug Tracker</strong></h2>
+                    <p class="lead mb-5">
+                        Brenham TX, 77833 <br />
+                        Phone: (832) 585 - 6877
+                    </p>
+                </div>
+            </div>
+            <div class="col-7">
+                <form asp-action="Index" asp-controller="Home" method="post">
+                    <div class="form-group">
+                        <label>@Html.LabelFor(model => model.Name)</label>
+                        @Html.TextBoxFor(model => model.Name)
+                    </div>
+
+                    <div class="form-group">
+                        <label>@Html.LabelFor(model => model.Email)</label>
+                        @Html.TextBoxFor(model => model.Email)
+                    </div>
+
+                    <div class="form-group">
+                        <label>@Html.LabelFor(model => model.Message)</label>
+                        @Html.TextAreaFor(model => model.Message)
+                    </div>
+
+                </form>
+                @*<div class="form-group">
+                    <label for="inputName">Name</label>
+                    <input type="text" id="inputName" class="form-control" />
+                </div>*@
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*<h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>*@
+
+@*<address>
+        One Microsoft Way<br />
+        Redmond, WA 98052-6399<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>*@

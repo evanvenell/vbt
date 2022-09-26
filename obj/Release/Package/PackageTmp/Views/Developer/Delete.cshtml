@@ -1,0 +1,102 @@
+﻿@model BugTrackerApplication.Models.Developer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Delete Developer</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/Ticket/Index">Your Developers</a>
+                    </li>
+                    <li class="breadcrumb-item active">Delete</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-11">
+                <div class="card">
+                    <div class="card-primary">
+                        <div class="card-header" style="background-color: #dc3545;">
+                            <h3 class="card-text">Are you sure you want to delete this Developer?</h3>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <h4 style="font-size: 30px;">Developer:  @Html.DisplayFor(model => model.ID) </h4>
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    @*<dt>
+                                        @Html.DisplayNameFor(model => model.RoleAssignment.DeveloperID)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.RoleAssignment.DeveloperID)
+                                    </dd>*@
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.LastName)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.LastName)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.FirstMidName)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.FirstMidName)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.EmailAddress)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.EmailAddress)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.HireDate)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.HireDate)
+                                    </dd>
+
+                                </dl>
+
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-actions no-color">
+                                        <input type="submit" value="Delete" class="btn btn-default" /> |
+                                        @Html.ActionLink("Back to List", "Index")
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

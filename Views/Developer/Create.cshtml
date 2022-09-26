@@ -1,0 +1,136 @@
+﻿@model BugTrackerApplication.Models.Developer
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Create Developer</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/User/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/Ticket/Index">Your Developers</a>
+                    </li>
+                    <li class="breadcrumb-item active">Create New</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+<div class="content">
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Developer</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <!-- NOTE: Import UserID for Developer Creation -->
+            <div class="form-group" style="display: none">
+                @Html.LabelFor(model => model.UserId, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <!--Html.TextBox("UserID")-->
+                    <!--<input type="text" class="form-control" disabled Html.TextBox("UserID")-->
+                    @*@Html.TextBox("UserID", new { htmlAttributes = new { @class = "form-control", @readonly = true } })*@
+                    @Html.TextBox("UserID")
+                    @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <!-- ./Improt UserID for Developer Creation -->
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstMidName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstMidName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstMidName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.RoleAssignment.RoleName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.RoleAssignment.RoleName)
+                    @Html.ValidationMessageFor(model => model.RoleAssignment.RoleName)
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <p style="font-size: 30px;">Some of the most recent tickets from your Application:</p>
+                <div class="col-md-offset-2 col-md-10">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                List<BugTrackerApplication.ViewModels.AssignedTicketData> tickets = ViewBag.Tickets;
+
+                                foreach (var ticket in tickets)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedTicket"
+                                               value="@ticket.TicketID"
+                                               @(Html.Raw(ticket.Assigned ? "checked=\"checked\"" : "")) />
+                                        @ticket.TicketID @: @ticket.Title
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

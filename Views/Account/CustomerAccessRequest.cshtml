@@ -1,0 +1,50 @@
+﻿@model BugTrackerApplication.Models.CustomerAccessRequestViewModel
+
+@{
+    ViewBag.Title = "CustomerAcessRequest";
+}
+<div class="hold-transition lockscreen">
+    <div class="lockscreen-wrapper">
+        <div class="lockscreen-logo">
+            <a href="/Account/Login">
+                <b>Thank you for Requesting Access</b>
+            </a>
+        </div>
+        <!-- Username -->
+        <div class="lockscreen-name">@ViewBag.FirstName @ViewBag.LastName</div>
+        <div class="help-block text-center">
+            A confirmation an email has been sent to the address you provided: @ViewBag.EmailSentToAddress
+        </div>
+
+        <!--<div class="lockscreen-item">
+            <div class="text-center">
+                <h3>The Following are details you have provided below:</h3>
+                <p>
+                    First Name: ViewBag.EMPFirstName <br>
+                    Last Name: ViewBag.EMPLastName <br>
+                    Email Address: ViewBag.EmailSentToEmployee
+                </p>
+            </div>
+        </div>-->
+        <div class="lockscreen-footer text-center">
+            If you are ready to get started please click the link below to personalize your profile.
+        </div>
+        <div class="text-center">
+            <a href="/Account/MyProfile">
+                Personalize my profile
+            </a>
+        </div>
+        <div class="text-center">
+            Or if you would like to go ahead an sign in
+        </div>
+        <div class="text-center">
+            <a href="/Account/Login">Sign into your account here</a>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

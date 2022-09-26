@@ -1,0 +1,267 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Dashboard Home</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Home</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+        <!-- Row Spacer -->
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <!-- Whitespace Empty Area TEST -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!--<div class="row" style="padding-bottom: 25px;">-->
+            <!--<div class="col-lg-6">-->
+            <!-- Begin Top Row -->
+            @*<div class="col-lg-5" style="padding-left: 50px;">*@
+            <div class="col-lg-5" style="padding-left: 40px;">
+                <!-- AREA CHART - Tickets by Priority -->
+                <div class="card">
+                    <!--<div class="card card-primary">-->
+                    <div class="card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Tickets by Priority</h3>
+                        </div>
+                        <div class="card-body" style="padding-bottom: 30px;">
+                            <div class="chart">
+                                <div class="chartjs-render-monitor">
+
+                                    <!-- Attempt 3 -->
+                                    <canvas id="TPbarChart" style="min-height: 300px; height: 375px; max-height: 375px; max-width: 100%; display: block; width: 456px;" width="456" height="300" class="chartjs-render-monitor"></canvas>
+
+                                    <script>
+                                        var c = document.getElementById("TPbarChart");
+                                        var ctx = c.getContext('2d');
+                                        var tData = $.getValues("/Home/BarChartData1");
+                                        var myBarChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: tData,
+                                            options: {
+                                                scales: {
+                                                    yAxes: [{
+                                                        ticks: {
+                                                            beginAtZero: true
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        });
+
+                                    </script>
+
+                                </div>
+                                <!--<canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 456px;" width="456" height="250" class="chartjs-render-monitor"></canvas>-->
+                            </div>
+                        </div>
+
+                        <!---->
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-lg-5" style="padding-left: 40px;">*@
+            <div class="col-lg-5" style="padding-left: 40px;">
+                <!-- AREA CHART - Tickets by Type -->
+                <div class="card">
+                    <!--<div class="card card-primary">-->
+                    <div class="card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Tickets by Type</h3>
+                        </div>
+                        <div class="card-body" style="padding-bottom: 30px;">
+                            <div class="chart">
+                                <div class="chartjs-render-monitor">
+                                    <!-- Donut Chart  -->
+                                    <!--<canvas id="TTdonutChart" class="chartjs-render-monitor"></canvas>-->
+                                    <canvas id="TTdonutChart" style="min-height: 300px; height: 375px; max-height: 375px; max-width: 100%; display: block; width: 456px;" width="456" height="300" class="chartjs-render-monitor"></canvas>
+
+                                    <script>
+                                        var c = document.getElementById("TTdonutChart");
+                                        var ctx = c.getContext('2d');
+                                        var tData = $.getValues("/Home/DonutChartData1");
+                                        var myBarChart = new Chart(ctx, {
+                                            //type: 'polarArea',
+                                            //type: 'radar',
+                                            //type: 'pie',
+                                            type: 'doughnut',
+                                            data: tData,
+                                            options: {
+                                                //scales: {
+                                                //    yAxes: [{
+                                                //        ticks: {
+                                                //            beginAtZero: true
+                                                //        }
+                                                //    }]
+                                                //}
+                                            }
+                                        });
+
+
+
+
+
+                                    </script>
+
+                                    <!--<div class="chartjs-size-monitor-expand">
+
+                            </div>
+                            <div class="chartjs-size-monitor-shrink">
+
+                            </div>-->
+                                </div>
+
+                            </div>
+                        </div>
+                        <!---->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style="padding-top: 30px; padding-bottom: 20px;">
+            @*<div class="col-lg-5" style="padding-left: 50px;">*@
+            <div class="col-lg-5" style="padding-left: 40px;">
+                <!-- AREA CHART - Tickets by Status-->
+                <div class="card">
+                    <!--<div class="card card-primary">-->
+                    <div class="card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Tickets by Status</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <div class="chartjs-render-monitor">
+                                    <canvas id="TSbarChart" style="min-height: 300px; height: 375px; max-height: 375px; max-width: 100%; display: block; width: 456px;" width="456" height="300" class="chartjs-render-monitor"></canvas>
+
+                                    <script>
+                                        var c = document.getElementById("TSbarChart");
+                                        var ctx = c.getContext('2d');
+                                        var tData = $.getValues("/Home/BarChartData2");
+                                        var myBarChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: tData,
+                                            options: {
+                                                scales: {
+                                                    yAxes: [{
+                                                        ticks: {
+                                                            beginAtZero: true
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        });
+
+                                    </script>
+                                    <!--<div class="chartjs-size-monitor-expand">
+
+                            </div>
+                            <div class="chartjs-size-monitor-shrink">
+
+                            </div>-->
+                                </div>
+
+                            </div>
+                        </div>
+                        <!---->
+                    </div>
+                </div>
+            </div>
+
+            <!---->
+            <!-- AREA CHART - Tickets by User -->
+            @*<div class="col-lg-5" style="padding-left: 40px;">*@
+            <div class="col-lg-5" style="padding-left: 40px;">
+                <div class="card">
+                    <!--<div class="card card-primary">-->
+                    <div class="card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Tickets by Lifetime</h3> <!-- THis is just temporary but will be replaced by Tickets by User -EV 04/01/2021 -->
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <div class="chartjs-render-monitor">
+                                    <canvas id="TLlineChart" style="min-height: 300px; height: 375px; max-height: 375px; max-width: 100%; display: block; width: 456px;" width="456" height="300" class="chartjs-render-monitor"></canvas>
+                                    <script>
+                                        var c = document.getElementById("TLlineChart");
+                                        var ctx = c.getContext('2d');
+                                        var tData = $.getValues("/Home/TicketLifeTimeChartData");
+                                        var myBarChart = new Chart(ctx, {
+                                            type: 'polarArea',
+                                            data: tData,
+                                            options: {
+                                                responsive: true,
+                                                //scales: {
+                                                //    x: {
+                                                //        display: true,
+                                                //        title: {
+                                                //            display: true,
+                                                //            text: 'Month'
+                                                //        }
+                                                //    },
+                                                //    y: {
+                                                //        display: true,
+                                                //        title: {
+                                                //            display: true,
+                                                //            text: 'Value'
+                                                //        }
+                                                //    }
+                                                //}
+                                                scales: {
+                                                    //yAxes: [{
+                                                    //    ticks: {
+                                                    //        beginAtZero: false
+                                                    //    }
+                                                    //}]
+                                                }
+                                            }
+                                        });
+
+                                    </script>
+
+
+                                    <!--<div class="chartjs-size-monitor-expand">
+
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!---->
+                                </div>
+                            </div>
+                            <!---->
+                        </div>
+                        <!-- /.col-md-6 -->
+                    </div>
+                </div>
+                <!-- /.row -->
+                <!-- Testing Chart.js Functionality -->
+                <!-- /.Testing Chart.js FUnctionality -->
+            </div><!-- /.container-fluid -->
+        </div>
+    </div>
+    <!-- /.content -->
+</div>

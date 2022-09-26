@@ -1,0 +1,96 @@
+﻿@model BugTrackerApplication.Models.IndexViewModel
+
+
+@using (Html.BeginForm("UserSettings", "Manage"))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <div class="card-primary">
+            <div class="card-header" style="background-color: #6c757d; opacity:0.9 ">
+                <div class="card-title">
+                    <h3>User Account Settings</h3>
+                    <div class="card-text">
+                        <h3 style="font-size: 17px;">Account details associated with your user account</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-gorup row">
+                    <label class="col-sm-2 col-form-label">Profile Picture</label>
+                    <div class="col-md-10">
+                        @Html.ActionLink("Edit Profile Photo", "ProfilePhoto", "Manage", new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+
+                <div class="form-group row" style="padding-top: 15px;">
+
+                    <label class="col-sm-2 col-form-label">Location</label>
+                    <div class="col-md-10">
+                        <!--Html.EditorFor(model => model.EducationOrExperience, new { htmlAttributes = new { class = "form-control" } })-->
+                        @Html.EditorFor(m => m.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "Location" } })
+                        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Email </label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Phone</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone Number" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Job Title</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.JobTitle, new { htmlAttributes = new { @class = "form-control", @placeholder = "Job Title or Position" } })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Education or Experience</label>
+                    <div class="col-md-12">
+
+                        <!--Html.TextAreaFor(m => m.EducationOrExperience, new { class = "form-control", rows = "2" })-->
+                        @Html.EditorFor(m => m.EducationOrExperience, new { htmlAttributes = new { @class = "form-control", @placeholder = "Education or Experience" } })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Skills</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.Skills, new { htmlAttributes = new { @class = "form-control", @placeholder = "Skills" } })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Notes</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", @rows = "2", @placeholder = "Notes (other applicable notes you want users to see)" })
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit the Developer Profile Button -->
+            <div class="form-group row">
+                <div class="offset-sm-1 col-sm-10">
+                    <input type="submit" value="Submit" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

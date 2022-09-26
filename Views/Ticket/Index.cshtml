@@ -1,0 +1,150 @@
+﻿@model IEnumerable<BugTrackerApplication.Models.Ticket>
+
+@{
+    ViewBag.Title = "Tickets";
+}
+
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Your Tickets</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Manage Tickets</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Empty Whitespace Column Begin -->
+            <div class="col-lg-11">
+                <div class="row" style="padding-bottom: 65px;">
+                    <!-- Empty Whitespace Before Content Start -->
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <p style="justify-self: left">
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <div class="card">
+                    <div class="card-primary">
+                        <div class="card-header" style="background-color: #ffc107">
+                            <h3 class="card-text">Tickets:</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Modernized Larger WORKING Search Field -->
+                            <!--using (Html.BeginForm())
+                            {
+                                <p>
+                                    <input class="form-control form-control-lg" type="text" placeholder="Search for Tickets here."
+                                     Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                                           <input type="submit" value="Add" />
+                                </p>
+                            }-->
+                            <!-- Old WORKING Code -->
+                            @using (Html.BeginForm())
+                            {
+                                <p>
+                                    Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                                    <input type="submit" value="Search" />
+                                </p>
+                            }
+
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        <!--Html.DisplayNameFor(model => model.TicketID)-->
+                                        @Html.ActionLink("Ticket ID", "Index", new { sortOrder = ViewBag.IDSortParm })
+                                    </th>
+                                    <th>
+                                        <!--Html.DisplayNameFor(model => model.TicketTitle)-->
+                                        @Html.ActionLink("Ticket Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
+                                    </th>
+                                    <th>
+                                        <!--Developer-->
+                                        @Html.ActionLink("Developer", "Index", new { sortOrder = ViewBag.DevSortParm })
+                                    </th>
+                                    <th>
+                                        <!--Html.DisplayNameFor(model => model.TicketStatus)-->
+                                        @Html.ActionLink("Ticket Status", "Index", new { sortOrder = ViewBag.StatSortParm })
+                                    </th>
+                                    <!-- Ticket Type -->
+                                    <!-- ./TicketType -->
+                                    <!-- Associated Project -->
+                                    <th>
+                                        <!--Associated Project-->
+                                        <!--Ticket Type-->
+                                        @Html.ActionLink("Ticket Type", "Index", new { sortOrder = ViewBag.TypeSortParm })
+                                    </th>
+                                    <!-- ./Associated Project -->
+                                    <th>
+                                        <!--Html.DisplayNameFor(model => model.Created)-->
+                                        @Html.ActionLink("Created", "Index", new { sortOrder = ViewBag.DateSortParm })
+                                    </th>
+                                    <!-- Credits -->
+                                    <!--<th>
+                                        
+                                        Html.ActionLink("Credits", "Index", new { sortOrder = ViewBag.CredSortParm })
+                                    </th>-->
+                                    <!-- ./Credits -->
+                                    <th>
+                                        <!--Associated Project-->
+                                        @Html.ActionLink("Associated Project", "Index", new { sortOrder = ViewBag.ProjSortParm })
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TicketID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TicketTitle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Project.AssignedDeveloper)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TicketStatus)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TicketType)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Created)
+                                        </td>
+                                        <!--<td>
+                                            Html.DisplayFor(modelItem => item.Credits)
+                                        </td>-->
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Project.ProjectName)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.TicketID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.TicketID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.TicketID })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

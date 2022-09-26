@@ -1,0 +1,656 @@
+﻿
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="https://iamevanvenell.com" class="brand-link">
+        @*<img src="~/Content/Images/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"style="opacity: .8">*@
+        @*<img src="~/images/BugTrackerLogo_v2.png" alt="BTA Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8; height: 30px; width: 30px;" />*@
+        <span class="brand-text font-weight-light"><strong>Venell Bug Tracker</strong></span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+
+                @using Microsoft.AspNet.Identity
+
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    var userId = User.Identity.GetUserId();
+                    var context = new BugTrackerApplication.DAL.ApplicationContext();
+                    var user = context.Users.Where(u => u.Id == userId).FirstOrDefault();
+                    if (user.ProfilePicture == null)
+                    {
+                        @*<img src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" class="img-circle elevation-2" alt="User Image" style="width: 45px;">*@
+                    <div class="img-circle elevation-2">
+                        <i class="fa fa-user-alt" style="font-size: 25px; color: white"></i>
+                    </div>
+                    }
+                    else
+                    {
+                        @*<img class="img-circle elevation-2" src="@Url.Action("Photo", "Manage", new { UserId = User.Identity.GetUserId() })" alt="User profile picture" style="width: 45px; height: 45px;" />*@
+                        <img class="img-circle elevation-2" src="@Url.Action("Photo", "Manage", new { UserId = User.Identity.GetUserId() })" alt="User profile picture" style="width: 45px; height: 45px;" />
+                    }
+
+                    @*<img class="img-circle elevation-2" src="@Url.Action("Photo", "Manage", new { UserId = User.Identity.GetUserId() })" alt="User profile picture" style="width: 45px; height: 45px;" />*@
+                }
+                else
+                {
+                    @*<img src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" class="img-circle elevation-2" alt="User Image" style="width: 45px;">*@
+                    <div  class="img-circle elevation-2">
+                        <i class="fa fa-user-alt" style="font-size: 25px; color: white"></i>
+                    </div>
+                }
+            </div>
+            <div class="info">
+                <strong style="font-size: 18px; color: #ffffff">Welcome, </strong>
+                <!--Html.Partial("_LoginPartial")-->
+                <a class="d-block">
+                    @Html.Partial("_LoginPartial")
+                </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <i class="fa fa-circle" style="color: #5cb85c;"></i>
+                    <i class="warning" style="color: #F8F8FF;"><span>Online</span></i>
+                }
+                else
+                {
+                    <i class="fa fa-circle" style="color: #ff0000;"></i>
+                    <i class="warning" style="color: #F8F8FF;"><span>Offline/Logged Out</span></i>
+                }
+            </div>
+        </div>
+
+
+        @if (User.IsInRole("Basic"))
+        {
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard Functions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Home/Index" class="nav-link active">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Dashboard Home</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Developer/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users-cog"></i>
+                                    <p>Developers</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Ticket/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-th-list"></i>
+                                    <p>Manage Tickets</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/Manage/Index" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                My Profile
+                                <span class="right badge badge-danger">Edit</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        }
+
+        <!-- Demo_Submitter-->
+        @if (User.IsInRole("Demo_Submitter"))
+        {
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard Functions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Home/Index" class="nav-link active">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Dashboard Home</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Developer/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users-cog"></i>
+                                    <p>Developers</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Ticket/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-th-list"></i>
+                                    <p>Manage Tickets</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/Manage/Index" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                My Profile
+                                <span class="right badge badge-danger">Edit</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        }
+        <!-- ./Demo_Submitter -->
+        @if (User.IsInRole("Developer"))
+        {
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard Functions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Home/Index" class="nav-link active">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Dashboard Home</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Developer/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users-cog"></i>
+                                    <p>Manage Developers</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Project/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-project-diagram"></i>
+                                    <p>Manage Projects</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Ticket/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-th-list"></i>
+                                    <p>Manage Tickets</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Submitter/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Manage Submitters
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="/Manage/Index" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                My Profile
+                                <span class="right badge badge-danger">Edit</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        }
+        <!-- Demo_Developer -->
+        @if (User.IsInRole("Demo_Developer"))
+        {
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard Functions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Home/Index" class="nav-link active">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Dashboard Home</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Developer/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users-cog"></i>
+                                    <p>Manage Developers</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Project/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-project-diagram"></i>
+                                    <p>Manage Projects</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Ticket/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-th-list"></i>
+                                    <p>Manage Tickets</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Submitter/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Manage Submitters
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="/Manage/Index" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                My Profile
+                                <span class="right badge badge-danger">Edit</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        }
+        <!-- ./Demo_Developer-->
+
+        @if (User.IsInRole("Admin"))
+        {
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard Functions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Home/Index" class="nav-link active">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Dashboard Home</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Developer/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users-cog"></i>
+                                    <p>Manage Developers</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Role/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-user-plus"></i>
+                                    <p>User Role Assignments</p>
+                                </a>
+                            </li>
+                            <!--<li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-friends"></i>
+                                <p>Manage Project Users</p>
+                            </a>
+                        </li>-->
+                            <li class="nav-item">
+                                <a href="/Project/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-project-diagram"></i>
+                                    <p>Manage Projects</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Ticket/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-th-list"></i>
+                                    <p>Manage Tickets</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Submitter/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Manage Submitters
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="/Manage/Index" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                My Profile
+                                <span class="right badge badge-danger">Edit</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        }
+        <!-- Demo_Admin -->
+        @if (User.IsInRole("Demo_Admin"))
+        {
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard Functions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Home/Index" class="nav-link active">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Dashboard Home</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Developer/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users-cog"></i>
+                                    <p>Manage Developers</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Role/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-user-plus"></i>
+                                    <p>User Role Assignments</p>
+                                </a>
+                            </li>
+                            <!--<li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-friends"></i>
+                                <p>Manage Project Users</p>
+                            </a>
+                        </li>-->
+                            <li class="nav-item">
+                                <a href="/Project/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-project-diagram"></i>
+                                    <p>Manage Projects</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Ticket/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-th-list"></i>
+                                    <p>Manage Tickets</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Submitter/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Manage Submitters
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="/Manage/Index" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                My Profile
+                                <span class="right badge badge-danger">Edit</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        }
+        <!-- ./Demo_Admin -->
+
+        @if (User.IsInRole("Project Manager"))
+        {
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard Functions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Home/Index" class="nav-link active">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Dashboard Home</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Developer/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users-cog"></i>
+                                    <p>Manage Developers</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Project/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-project-diagram"></i>
+                                    <p>Manage Projects</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Ticket/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-th-list"></i>
+                                    <p>Manage Tickets</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Submitter/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Manage Submitters
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="/Manage/Index" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                My Profile
+                                <span class="right badge badge-danger">Edit</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        }
+
+        <!-- Demo_ProjectManager -->
+        @if (User.IsInRole("Demo_ProjectManager"))
+        {
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard Functions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/Home/Index" class="nav-link active">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>Dashboard Home</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Developer/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users-cog"></i>
+                                    <p>Manage Developers</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Project/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-project-diagram"></i>
+                                    <p>Manage Projects</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Ticket/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-th-list"></i>
+                                    <p>Manage Tickets</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Submitter/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Manage Submitters
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="/Manage/Index" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                My Profile
+                                <span class="right badge badge-danger">Edit</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        }
+        <!-- ./Demo_ProjectManager-->
+        <!-- TODO: Need to bg fix this if the Pending status does not get removed to avoid this popping up under conflcting roles side menu's'-->
+        @if (User.IsInRole("Pending"))
+        {
+            <!--<nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">-->
+
+                    <!-- add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                    <!--<li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                dashboard functions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/home/index" class="nav-link active">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>dashboard home</p>
+                                </a>
+                            </li>
+                        </ul>
+
+                    <li class="nav-item">
+                        <a href="/manage/index" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                my profile
+                                <span class="right badge badge-danger">edit</span>
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </nav>-->
+            <!-- /.sidebar-menu -->
+        }
+
+
+
+        @*<nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+
+            </ul>
+        </nav>*@
+        <!-- /.sidebar-menu -->
+        <!-- Sidebar Menu -->
+
+
+    </div>
+    <!-- /.sidebar -->
+</aside>

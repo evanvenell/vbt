@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BugTrackerApplication.ViewModels.EnrollmentDateGroup>
+
+@{
+    ViewBag.Title = "User Base Statistics";
+}
+
+
+<h2>User Base Statistics</h2>
+
+<table>
+    <tr>
+        <th>
+            Enrollment Date
+        </th>
+        <th>
+            Submitters
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnrollmentDate)
+            </td>
+            <td>
+                @item.SubmitterCount
+            </td>
+        </tr>
+    }
+</table>
+

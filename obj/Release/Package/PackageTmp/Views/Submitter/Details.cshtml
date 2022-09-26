@@ -1,0 +1,114 @@
+﻿@model BugTrackerApplication.Models.Submitter
+
+@{
+    ViewBag.Title = "Details";
+}
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">User Details</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/User/Index">Edit Role Assignments</a>
+                    </li>
+                    <li class="breadcrumb-item active">Details</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-primary">
+                        <div class="card-header">
+                            <h3 class="card-text">View the in-depth user details.</h3>
+                        </div>
+                        <div class="card-body">
+
+                            <div>
+
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.LastName)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.LastName)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.FirstMidName)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.FirstMidName)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.EmailAddress)
+                                    </dt>
+
+                                    <dt>
+                                        @Html.DisplayFor(model => model.EmailAddress)
+                                    </dt>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.EnrollmentDate)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.EnrollmentDate)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Enrollments)
+                                    </dt>
+                                    <dd>
+                                        <table class="table">
+                                            <tr>
+                                                <td>Ticket Title</td>
+                                                <td>Grade</td>
+                                            </tr>
+                                            @foreach (var item in Model.Enrollments)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Ticket.TicketTitle)
+                                                    </td>
+                                                    <!--<td>
+                                                        Html.DisplayFor(modelItem => item.Grade)
+                                                    </td>-->
+                                                </tr>
+                                            }
+                                        </table>
+                                    </dd>
+                                    <dd>
+                                    </dd>
+
+                                </dl>
+                            </div>
+                            <p>
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+                                @Html.ActionLink("Back to List", "Index")
+                            </p>
+                        </div><!-- ./card-body -->
+                    </div><!-- ./card-primary -->
+                </div><!-- ./card -->
+            </div>
+        </div>
+    </div>
+
+</div>

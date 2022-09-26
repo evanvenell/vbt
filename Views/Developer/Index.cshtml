@@ -1,0 +1,167 @@
+﻿@model  BugTrackerApplication.ViewModels.DeveloperIndexData
+
+@{
+    ViewBag.Title = "Developers";
+}
+
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Manage Developers</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Manage Developers</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Empty Whitespace Column Begin -->
+            <div class="col-lg-11">
+                <div class="row" style="padding-bottom: 65px;">
+                    <!-- Empty Whitespace Before Content Start -->
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <p style="justify-self: left">
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <div class="card">
+                    <div class="card-primary">
+                        @*<div class="card-header" style="background-color: #ffc107">*@
+                        <div class="card-header">
+                            <h3 class="card-text">Developers:</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Hire Date</th>
+                                    <th>Role</th>
+                                    <th>Tickets</th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model.Developers)
+                                {
+                                    string selectedRow = "";
+                                    if (item.ID == ViewBag.DeveloperID)
+                                    {
+                                        selectedRow = "success";
+                                    }
+                                    <tr class="@selectedRow">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FirstMidName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LastName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EmailAddress)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HireDate)
+                                        </td>
+                                        <td>
+                                            @*@if (item.RoleAssignment != null)
+                            {
+                                @item.RoleAssignment.RoleName
+                            }*@
+                                        </td>
+                                        <td>
+                                            @{
+                                                foreach (var ticket in item.Tickets)
+                                                {
+                                                    @ticket.TicketID @: @ticket.TicketTitle <br />
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Select", "Index", new { id = item.ID }) |
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                            @if (Model.Tickets != null)
+                            {
+                                <h3>Tickets worked by selected Developer</h3>
+                                <table class="table">
+                                    <tr>
+                                        <th></th>
+                                        <th>Ticket ID</th>
+                                        <th>Ticket Title</th>
+                                        <th>Associated Project</th>
+                                    </tr>
+
+                                    @foreach (var item in Model.Tickets)
+                                    {
+                                        string selectedRow = "";
+                                        if (item.TicketID == ViewBag.TicketID)
+                                        {
+                                            selectedRow = "success";
+                                        }
+                                        <tr class="@selectedRow">
+                                            <td>
+                                                @Html.ActionLink("Select", "Index", new { ticketID = item.TicketID })
+                                            </td>
+                                            <td>
+                                                @item.TicketID
+                                            </td>
+                                            <td>
+                                                @item.TicketTitle
+                                            </td>
+                                            <td>
+                                                @item.Project.ProjectName
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                            @if (Model.Enrollments != null)
+                            {
+                                <h3>
+                                    User(s) who submitted the Selected Ticket
+                                </h3>
+                                <table class="table">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Grade</th>
+                                    </tr>
+
+                                    @foreach (var item in Model.Enrollments)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Submitter.FullName
+                                            </td>
+                                            <!--<td>
+                            Html.DisplayFor(modelItem => item.Grade)
+                        </td>-->
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

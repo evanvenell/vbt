@@ -1,0 +1,124 @@
+﻿@model BugTrackerApplication.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="register-page" style="min-height: 570.391px;">
+    <div class="register-box">
+        <div class="register-logo">
+            <b>Venell Bug Tracker</b>
+        </div>
+        <!-- ./register-logo -->
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Register as a new User</p>
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken();
+                    <div class="input-group mb-3">
+                        
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First name" } )
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last name" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" } )
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" } )
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <!--Html.TextBoxFor(m => m.UserType, new { htmlAttributes = new { class = "form-horizontal", placeholder = "Email" } })-->
+                        @Html.EnumDropDownListFor(m => m.UserType, new { @class = "form-control", @placeholder = "Type of profile requested" } )
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user-cog"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="input-group mb-3">
+            Html.TextBoxFor(m => m.ProfilePicture, new { htmlAttributes = new { class = "form-control", placeholder = "Email" } })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>-->
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree" />
+                                <label for="agreeTerms">
+                                    I agree to the
+                                    <a href="/Home/PageDevelopment">terms</a>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-4">
+                            <input type="submit" class="btn btn-primary btn-block" value="Register" />
+                        </div>
+                        <!-- ./col -->
+                    </div>
+                }
+                <div class="social-auth-links text-center">
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i>
+                        Sign up using Facebook
+                    </a>
+
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i>
+                        Sign up using Google+
+                    </a>
+                </div>
+                <!-- Cancel Register action and redirect to login page -->
+                @Html.ActionLink("I already have an account", "Login")
+            </div>
+        </div>
+        <!-- ./card -->
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

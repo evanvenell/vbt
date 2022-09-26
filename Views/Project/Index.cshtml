@@ -1,0 +1,125 @@
+﻿@model IEnumerable<BugTrackerApplication.Models.Project>
+
+@{
+    ViewBag.Title = "Projects";
+}
+
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Manage Projects</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Manage Projects</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Empty Whitespace Column Begin -->
+            <div class="col-lg-11">
+                <div class="row" style="padding-bottom: 65px;">
+                    <!-- Empty Whitespace Before Content Start -->
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <p style="justify-self: left">
+                    @Html.ActionLink("Create New", "Create")
+                </p>
+                <div class="card">
+                    <div class="card-primary">
+                        @*<div class="card-header" style="background-color: #ffc107">*@
+                        <div class="card-header" style="background-color: #28a745">
+                            <h3 class="card-text">Projects:</h3>
+                        </div>
+                        <div class="card-body">
+                            @using (Html.BeginForm())
+                            {
+                                <p>
+                                    Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                                    <input type="submit" value="Search" />
+                                </p>
+                            }
+                            <table class="table">
+                                <tr>
+                                    <!--<th>
+                    Html.DisplayNameFor(model => model.Administrator.LastName)
+                </th>-->
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ProjectName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ProjectDescription)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.AssignedDeveloper)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Budget)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.StartDate)
+                                    </th>
+
+                                    <th>
+                                        Administrator
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <!--<td>
+                        Html.DisplayFor(modelItem => item.Administrator.LastName)
+                    </td>-->
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProjectName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProjectDescription)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AssignedDeveloper)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Budget)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartDate)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Administrator.FullName)
+                                        </td>
+
+                                        <td>
+                                            <!--Html.ActionLink("Manage Users", "", new { id = item.ProjectID }) |-->
+                                            <a href="@Url.Action("Details", "Developer", new { id = item.DeveloperID }, null)" class="btn btn-primary btn-sm">Manage Users</a>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.ProjectID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ProjectID })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

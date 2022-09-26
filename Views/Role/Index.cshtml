@@ -1,0 +1,326 @@
+﻿<!--using BugTrackerApplication.Models-->
+<!--IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>-->
+<!--model List<BugTrackerApplication.ViewModels.RoleManagerViewModel>-->
+@model  IEnumerable<BugTrackerApplication.ViewModels.RoleManagerViewModel>
+<!--model BugTrackerApplication.ViewModels.RoleManagerViewModel-->
+
+@{
+    ViewBag.Title = "ManageUserRoles";
+}
+
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Manage User Roles</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Manage User Roles</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Empty Whitespace Column Begin -->
+            <div class="col-lg-11">
+                <div class="row" style="padding-bottom: 40px;">
+                    <!-- Empty Whitespace Before Content Start -->
+                </div>
+            </div>
+            <!--<div class="col-lg-12">
+                <p style="justify-self: left">
+                    Html.ActionLink("Create New", "Create")
+                </p>
+            </div>-->
+            <!--<div class="row" style="padding-bottom: 25px;">-->
+            <!--<div class="col-lg-6">-->
+            <!-- Begin Top Row -->
+            <!--<div class="col-lg-6" style="padding-left: 100px;">-->
+            @using (Html.BeginForm("RoleAddToUser", "Role"))
+            {
+                <div class="col-lg-12">
+                    <!-- Left-hand side elements -->
+                    <!-- Users Selectable (scrollable) menu -->
+
+                    <div class="card">
+                        <div class="card-primary">
+                            <!--<div class="card-header" style="background-color: #ffc107">-->
+                            <div class="card-header">
+                                <h3 class="card-title" style="font-size: 25px;">Select 1 or more Users:</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <!--Html.Label("Users available for Role assignment: ", new { class = "col-md-8 control-label", style = "font-size: 18px;" })-->
+                                    <div class="col-md-12" style="font-size: 20px; width: 100%">
+                                        @*@Html.AntiForgeryToken()
+                                            @Html.ValidationSummary()*@
+                                        <p style="width: inherit; max-width: 110%">@Html.ListBox("UserName", (IEnumerable<SelectListItem>)ViewBag.AppUsers)</p>
+
+                                        <!--<p style="width: inherit; max-width: 110%">Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.AppRoles, "Select ...")</p>-->
+                                        <!--<p><input type="submit" value="Save" class="btn-primary" /></p>-->
+                                        <!--<select id="AppUsers" multiple="multiple" name="AppUsers" style="max-width: inherit; width: 120%;" Html.ListBox("AppUsers")</select>-->
+                                        <!-- NOTE: Ignore the above wanirng, missing the ">" but it is implied by the HTML added within the section for <select</select>.-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./Users Selectable (scrollable) menu -->
+                    <!-- Spacer Row -->
+                    <div class="row" style="padding-bottom: 50px;">
+                        <div class="col-lg-12">
+                            <style type="text/css">
+                                .line {
+                                    width: inherit;
+                                    height: 5px;
+                                    border-bottom: 1px solid black;
+                                    position: center
+                                }
+                            </style>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                    <!-- ./Spacer Row -->
+                    <!-- DropDown Menu for Role Selection -->
+                    <div class="card">
+                        <div class="card-primary">
+                            <!--<div class="card-header" style="background-color: #ffc107">-->
+                            <div class="card-header">
+                                <h3 class="card-title" style="font-size: 25px;">Select the Role to Assign</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="col-md-12" style="font-size: 20px; width: 100%">
+                                        <!--Html.DropDownList("AppRoles")-->
+                                        @*@Html.AntiForgeryToken()
+                                            @Html.ValidationSummary()*@
+
+                                        <p style="width: inherit; max-width: 100%">@Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.AppRoles, "Select ...")</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./DropDown Menu for Role Selection -->
+                    <!-- Submit Changes Button -->
+
+                    <div class="col-lg-12">
+                        <!--<p style="justify-self: left">
+                            Html.ActionLink("Create New", "Create")
+                        </p>-->
+                        <!--<button type="button" class="btn btn-block btn-primary btn-lg"></button>-->
+                        <!--Html.ActionLink("SUBMIT", "Update")-->
+                        @*@Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)*@
+
+                        <p><input type="submit" value="Assign Roles" class="btn btn-block btn-primary btn-lg" /></p>
+
+                    </div>
+
+
+                    <!-- ./Submit Changes Button -->
+                    <!-- ./Left-hand side elements -->
+                </div>
+            }
+            <!-- Right-hand side elements -->
+        <div class="col-lg-8" style="padding-left: 75px;">
+            <div class="card">
+                <div class="card-primary">
+                    <div class="card-header"  style="background-color: #6c757d; opacity:0.7 ">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <h3 class="card-title" style="font-size: 30px;">Your Personnel</h3>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 12px;">
+                                <div class="col-lg-12">
+                                    <h4 class="card-text" style="font-size: 20px;">All the Authenticated Users in your database.</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 12px;">
+                        <div class="col-md-7" style="text-align: left; padding-left: 25px;">
+                            <p style="justify-self: left;">
+                                Show @Html.TextBox("CurrentResultNumber") entries
+                            </p>
+                        </div>
+                        <div class="col-lg-5" style="text-align: left; padding-left: 25px;">
+                            <p style="justify-self: right;">
+                                Search: @Html.TextBox("SearchString")
+                                <input type="submit" value="Go" />
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Table -->
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table">
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+
+                                </tr>
+                                <!--using (Html.BeginForm("GetRoles", "AppRoles"))
+                        {
+                            Html.DropDownList("userName", (IEnumerable<SelectListItem>)ViewBag.AppRoles)
+                        }-->
+                                @if (Model != null)
+                                {
+                                    <!--foreach (var item in Model)-->
+                                    foreach (var item in Model)
+                                    {
+                                        string selectedRow = "";
+                                        if (item.UserId == ViewBag.GetRoles)
+                                        {
+                                            selectedRow = "success";
+                                        }
+                                        <tr class="@selectedRow">
+
+                                            <td>
+                                                @item.FullName
+                                            </td>
+
+                                            <td>
+                                                @item.Email
+                                            </td>
+
+                                            <td>
+                                                <!--item.Roles-->
+                                                <!--string.Join(" , ", item.Roles.ToList())-->
+                                                <!--string.Join(" , ", item.Roles.ToList())
+                                        Html.ActionLink("X", "DeleteRoleFromUser", "Role")-->
+                                                @string.Join(" , ", item.Roles.ToList())
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </table>
+                        </div>
+                    </div>
+                    <!-- ./Table -->
+
+                </div>
+            </div>
+            <div class="row" style="padding-bottom: 50px;">
+                <div class="col-lg-12">
+                    <style type="text/css">
+                        .line {
+                            width: inherit;
+                            height: 5px;
+                            border-bottom: 1px solid black;
+                            position: center
+                        }
+                    </style>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <!-- Remove Role from Users -->
+            <!--<div class="col-lg-13" style="padding-left: 200px;">-->
+
+            @using (Html.BeginForm("DeleteRoleFromUser", "Role"))
+            {
+                <div class="col-lg-13" style="text-align: center; float: right;">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="card">
+                                <div class="card-primary">
+                                    <div class="card-header" style="background-color: #dc3545">
+                                        <h3 class="card-title" style="font-size: 25px;">Select a User: </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="col-md-12" style="font-size: 20px;">
+
+                                                @*@Html.AntiForgeryToken()
+                                            @Html.ValidationSummary()*@
+                                                <!--Html.Label("User Name: ", new { class = "col-md-7 control-label", style = "font-size: 18px;" })-->
+                                                <p style="max-width: inherit; width: 100%; text-align: center;">@Html.ListBox("UserName", (IEnumerable<SelectListItem>)ViewBag.AppUsers)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5" style="padding-left: 20px;">
+                            <div class="card">
+                                <div class="card-primary">
+                                    <div class="card-header" style="background-color: #dc3545">
+                                        <h3 class="card-title" style="font-size: 25px;">Select a Role to Remove: </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <div class="col-lg-12" style="font-size: 20px; max-width: inherit; width: 100%">
+                                                @*@Html.AntiForgeryToken()
+                                            @Html.ValidationSummary()*@
+                                                <!--Html.Label("Role Name: ", new { class = "col-md-7 control-label", style = "font-size: 18px;" })-->
+                                                <p style="max-width: inherit; width: 110%; font-size: inherit;">@Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.AppRoles, "Select ...")</p>
+                                                <!--<p><input type="submit" value="Remove Role from User" class="btn-primary" /></p>-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <p><input type="submit" value="Remove Roles" class="btn btn-block btn-primary btn-lg" style="background-color: #dc3545;" /></p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+
+
+            <!-- ./Remove Role from Users -->
+        </div>
+            <!-- ./Right-hand side elements -->
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- Original Code for testing (below) -->
+@*<h2>Index</h2>
+
+    @Html.ActionLink("Create Role", "Create", "Role")
+    <style type="text/css">
+        #tbrole, .c {
+            border:double;
+        }
+    </style>
+
+    <table id="tbrole">
+        <tr>
+            <td class="c">
+                Role Name
+            </td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="c">
+                    @item.Name
+                </td>
+            </tr>
+        }
+    </table>*@

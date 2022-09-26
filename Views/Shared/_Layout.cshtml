@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>@ViewBag.Title  | Bug Tracker Application</title>
+    <link href="@Url.Content("~/Content/AdminLTE/adminlte.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Plugins/fontawesome-free/css/all.min.css")" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    <!--Scripts.Render("~/Scripts/jquery-3.4.1.min.js")-->
+    @Scripts.Render("~/Scripts/jquery-3.6.0.min.js")
+    @Scripts.Render("~/Scripts/Chart.min.js")
+    @Scripts.Render("~/Scripts/Common.js")
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        @Html.Partial("_NavBar")
+        @Html.Partial("_SideBar")
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Thank you for your continued support.
+            </div>
+            <!-- Default to the left -->
+            @*&copy; 2021 - Bug Tracker Application - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+            &copy; 2022 - Bug Tracker Application - Property of <a href="https://iamevanvenell.com">Evan Venell</a> - All Rights Reserved
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    <script src="@Url.Content("~/Plugins/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/AdminLTE/adminlte.min.js")"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

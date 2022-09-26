@@ -1,0 +1,124 @@
+﻿@*model BugTrackerApplication.Models.DemoLoginViewModel*@
+@model  IEnumerable<BugTrackerApplication.Models.DemoLoginViewModel>
+@{
+    ViewBag.Title = "DemoLogin";
+}
+
+<div class="register-page">
+    <div class="login-box" style="min-width: 150px; max-width: 475px; width: 35%">
+        <div class="login-logo">
+            <b>Venell Bug Tracker</b>
+        </div>
+        <!-- ./login-logo-->
+        <div class="card">
+            @*<div class="card-header">*@
+            <div class="card-header text-center">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h3>Demo_User login</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Click one of the options below to sign into your Demo session.</p>
+
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <!-- Custom CSS for login buttons -->
+                <style type="text/css">
+                    .Demologin-row {
+                        display: grid;
+                        grid-column-gap: 1px;
+                        grid-row-gap: 20px;
+                        grid-template-columns: auto auto;
+                        background-color: transparent;
+                        padding: 10px;
+                    }
+
+                    .Demologin-item {
+                        /*background-color: rgba(255, 255, 255, 0.8);*/
+                        /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+                        padding: 10px;
+                        font-size: 30px;
+                        text-align: center;
+                        
+                    }
+                </style>
+                <!-- ./Custom CSS for login buttons -->
+
+                <div class="row Demologin-row">
+                    @using (Html.BeginForm("DemoLogin_Admin", "Account"))
+                    {
+                        <div class="Demologin-item" style="display:block">
+                            <button class="fa fa-user icon fa-3x text-center" style="background-color: transparent; box-shadow: none; border-color: transparent; position: center;" type="submit">
+                                <br />
+                                @*<p style="font-size: 25px; padding-top: 10px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">*@
+                                <p style="padding-top: 10px; font: 400 21.3333px Arial; color: black;">
+                                    Admin
+                                </p>
+                            </button>
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("DemoLogin_ProjectManager", "Account"))
+                    {
+                        <div class="Demologin-item">
+                            <button class="fa fa-user icon fa-3x text-center" style="background-color: transparent; color: #FF6347; box-shadow: none; border-color: transparent; position: center;" type="submit">
+                                <br />
+                                <p style="padding-top: 10px; font: 400 21.3333px Arial; color: black;">
+                                    Project Manager
+                                </p>
+                            </button>
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("DemoLogin_Developer", "Account"))
+                    {
+                        <div class="Demologin-item">
+                            <button class="fa fa-user icon fa-3x text-center" style="background-color: transparent; color: #1e7e34 ;box-shadow: none; border-color: transparent; position: center;" type="submit">
+                                <br />
+                                <p style="padding-top: 10px; font: 400 21.3333px Arial; color: black;">
+                                    Developer
+                                </p>
+                            </button>
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("DemoLogin_Submitter", "Account"))
+                    {
+                        <div class="Demologin-item">
+                            <button class="fa fa-user icon fa-3x text-center" style="background-color: transparent; color: #007BFF ;box-shadow: none; border-color: transparent; position: center;" type="submit">
+                                <br />
+                                <p style="padding-top: 10px; font: 400 21.3333px Arial; color: black;">
+                                    Submitter
+                                </p>
+                            </button>
+                        </div>
+                    }
+
+
+
+                </div>
+
+                <div class="row" style="padding-top: 20px;">
+                    <div class="col-lg-12 text-center">
+                        <p>
+                            Have an account already?
+                            @Html.ActionLink("Sign In", "Login")
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

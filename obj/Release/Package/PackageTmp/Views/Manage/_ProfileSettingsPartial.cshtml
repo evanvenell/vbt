@@ -1,0 +1,113 @@
+﻿<!--model BugTrackerApplication.Models.ProfileSettingsViewModel-->
+@model BugTrackerApplication.Models.IndexViewModel
+
+
+<div class="form-horizontal">
+
+    @if (ViewBag.UserDeveloperID != null)
+    {
+        using (Html.BeginForm("ProfileSettings", "Manage"))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card-primary">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>Developer Details</h3>
+                        <div class="card-text">
+                            <h3 style="font-size: 17px;">Developer profile associated with this user account</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">First Name</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.DevFirstName, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Last Name</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.DevLastName, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Email Address</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.DevEmail, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Submit Changes Button -->
+                <div class="form-group row">
+                    <div class="offset-sm-1 col-sm-10">
+                        <!--<input type="submit" value="Edit Developer Profile" class="btn btn-warning" />-->
+                        <!--<a href="Url.Action("Create", "Comment", new { addComment = ViewBag.AddComment })" class="btn btn-primary btn-lg">Add Comment</a>-->
+                        <input type="submit" value="Edit Developer Profile" class="btn btn-warning" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    @if (ViewBag.UserSubmitterID != null)
+    {
+        using (Html.BeginForm("ProfileSettings", "Manage"))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card-primary">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>Submitter Details</h3>
+                        <div class="card-text">
+                            <h3 style="font-size: 17px;">Submitter profile associated with this user account</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">First Name</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.SubFirstName, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Last Name</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.SubLastName, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Email Address</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.SubEmail, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Submit Changes Button -->
+                <div class="form-group row">
+                    <div class="offset-sm-1 col-sm-10">
+                        <!--<input type="submit" value="Edit Developer Profile" class="btn btn-warning" />-->
+                        <!--<a href="Url.Action("Create", "Comment", new { addComment = ViewBag.AddComment })" class="btn btn-primary btn-lg">Add Comment</a>-->
+                        <input type="submit" value="Edit Submitter Profile" class="btn btn-warning" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

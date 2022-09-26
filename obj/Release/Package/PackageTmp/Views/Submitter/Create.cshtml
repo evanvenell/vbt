@@ -1,0 +1,98 @@
+﻿@model BugTrackerApplication.Models.Submitter
+
+@{
+    ViewBag.Title = "Create";
+}
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Create a New Submitter</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/User/Index">Edit Role Assignments</a>
+                    </li>
+                    <li class="breadcrumb-item active">Create New</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+<div class="content">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Submitter</h4>
+        <hr />
+        <!-- NOTE: Import UserID for Developer Creation -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserId, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <!--Html.TextBox("UserID")-->
+                <!--<input type="text" class="form-control" disabled Html.TextBox("UserID")-->
+                @Html.TextBox("UserID")
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <!-- ./Improt UserID for Developer Creation -->
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstMidName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstMidName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstMidName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EnrollmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

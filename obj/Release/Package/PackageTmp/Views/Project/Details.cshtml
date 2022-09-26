@@ -1,0 +1,362 @@
+﻿@model BugTrackerApplication.Models.Project
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Project Details</h1>
+                <!-- May add more detail here such as the clicked ticket ID next to the "Ticket Details" header element -->
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/Project/Index">Manage Projects</a>
+                    </li>
+                    <li class="breadcrumb-item active">Project Details</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-primary">
+                        <div class="card-header" style="background-color:#28a745";>
+                            <h3 class="card-text">Details for Project @Html.DisplayFor(model => model.ProjectID)</h3>
+                            <h5>
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectID }) |
+                                @Html.ActionLink("Back to List", "Index")
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Top Section -->
+                            <!-- Top Card -->
+                            <div>
+                                <!--<div class="row" style="padding-bottom: 30px;">-->
+                                <div class="row">
+                                    <!-- Empty Whitespace Before Content Start -->
+                                    <dl class="dl-horizontal">
+                                        <div class="row md-2">
+                                            <div class="col-lg-12">
+                                                <dt style="font-size: 25px;">
+                                                    Administrator
+                                                </dt>
+                                            </div>
+                                        </div>
+                                        <div class="row md-2">
+                                            <div class="col-lg-12">
+                                                <dt style="padding-left: 15px; font-size: 19px;">
+                                                    @Html.DisplayFor(model => model.Administrator.FullName)
+                                                </dt>
+                                            </div>
+                                        </div>
+                                    </dl>
+                                </div>
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    <!--<div class="row md-2">
+                                        <div class="col-lg-4">
+                                            <dt>
+                                                Administrator
+                                            </dt>
+                                        </div>
+                                    </div>
+
+                                    <div class="row md-2">
+                                        <div class="col-lg-8">
+                                            <dt>
+                                                Html.DisplayFor(model => model.Administrator.FullName)
+                                            </dt>
+                                        </div>
+                                    </div>-->
+                                    <!--<dt>
+                                        Administrator
+                                    </dt>-->
+                                    <div class="row md-2">
+                                        <div class="col-lg-4">
+                                            <dt style="font-size: 25px;">
+                                                @Html.DisplayNameFor(model => model.ProjectName)
+                                            </dt>
+                                        </div>
+                                        <div class="col-lg-8" style="padding-left: 375px;">
+                                            <dt style="font-size: 25px;">
+                                                @Html.DisplayNameFor(model => model.ProjectDescription)
+                                            </dt>
+                                        </div>
+                                    </div>
+                                    <div class="row md-2">
+                                        <div class="col-lg-4">
+                                            <dd style="padding-left: 15px;">
+                                                @Html.DisplayFor(model => model.ProjectName)
+                                            </dd>
+                                        </div>
+                                        <div class="col-lg-5" style="padding-left: 375px;">
+                                            <dd style="padding-left: 15px;">
+                                                @Html.DisplayFor(model => model.ProjectDescription)
+                                            </dd>
+                                        </div>
+                                        <div class="row" style="padding-bottom: 30px;">
+                                            <!-- Empty Whitespace Before Content Start -->
+                                            <hr />
+                                        </div>
+                                    </div>
+                                    <!-- ./ Top Card -->
+                                    <!-- ./Top Section -->
+                                    <!-- Bottom Section -->
+                                    <!-- Bottom-Left Card -->
+                                    <!-- OLD CODE BELOW!!! -->
+                                    <!--<dt>
+                                        Html.DisplayNameFor(model => model.AssignedDeveloper)
+                                    </dt>
+
+                                    <dd>
+                                        Html.DisplayFor(model => model.AssignedDeveloper)
+                                    </dd>
+
+                                    <dt>
+                                        Html.DisplayNameFor(model => model.Budget)
+                                    </dt>
+
+                                    <dd>
+                                        Html.DisplayFor(model => model.Budget)
+                                    </dd>
+
+                                    <dt>
+                                        Html.DisplayNameFor(model => model.StartDate)
+                                    </dt>
+
+                                    <dd>
+                                        Html.DisplayFor(model => model.StartDate)
+                                    </dd>-->
+
+                                </dl>
+
+                                <!-- Bottom Section -->
+
+                                <div class="row">
+                                    <!-- Bottom-Left Card -->
+                                    <div class="col-lg-5">
+                                        <div class="card">
+                                            <div class="card-primary">
+                                                <div class="card-header">
+                                                    <h3 class="card-text">Assigned Personnel</h3>
+                                                    <h5 class="card-text">Current Users on this Project.</h5>
+                                                </div>
+                                                <h5>
+                                                    @using (Html.BeginForm())
+                                                    {
+                                                        <p>
+                                                            Search: @Html.TextBox("SearchString")
+                                                            <input type="submit" value="Search" />
+                                                        </p>
+                                                    }
+                                                </h5>
+                                                <table class="table">
+                                                    <tr>
+                                                        <th>Username</th>
+                                                        <th>Email</th>
+                                                        <th>Role</th>
+                                                    </tr>
+
+                                                    @foreach (var item in Model.Tickets)
+                                                    {
+
+                                                        string selectedRow = "";
+                                                        if (item.TicketID == ViewBag.DeveloperID)
+                                                        {
+                                                            selectedRow = "success";
+                                                        }
+                                                        <tr class="@selectedRow">
+                                                            <td>
+                                                                @{
+                                                                    foreach (var dev in item.Developers)
+                                                                    {
+                                                                        @dev.FullName <br />
+                                                                    }
+                                                                }
+                                                            </td>
+
+                                                            <td>
+                                                                @{
+                                                                    foreach (var dev in item.Developers)
+                                                                    {
+                                                                        //dev.Email <br />
+                                                                        @dev.EmailAddress <br />
+                                                                    }
+                                                                }
+                                                            </td>
+
+                                                            <td>
+                                                                @*@{
+                                                                    foreach (var dev in item.Developers)
+                                                                    {
+                                                                        @dev.RoleAssignment.RoleName <br />
+                                                                    }
+                                                                }*@
+                                                            </td>
+                                                        </tr>
+                                                    }
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ./Bottom-Left Card -->
+                                    <!-- White Space to seperate the two tables -->
+                                    <!-- ./White Space to seperate the two tables -->
+                                    <!-- Bottom-Right Card -->
+                                    <div class="col-lg-7">
+                                        <div class="card">
+                                            <div class="card-primary">
+                                                <div class="card-header" style="background-color: #ffc107">
+                                                    <h3 class="card-text">Tickets for this Project</h3>
+                                                    <h5 class="card-text">Condensed Ticket Details</h5>
+
+                                                </div>
+                                                <h5>
+                                                    @using (Html.BeginForm())
+                                                    {
+                                                        <p>
+                                                            Search: @Html.TextBox("SearchString")
+                                                            <input type="submit" value="Search" />
+                                                        </p>
+                                                    }
+                                                </h5>
+                                                <table class="table">
+                                                    <tr>
+                                                        <th>Title</th>
+                                                        <th>Submitter(s)</th>
+                                                        <th>Developers</th>
+                                                        <th>Status</th>
+                                                        <th>Created</th>
+                                                    </tr>
+
+                                                    @foreach (var item in Model.Tickets)
+                                                    {
+                                                        string selectedRow = "";
+                                                        if (item.TicketID == ViewBag.TicketID)
+                                                        {
+                                                            selectedRow = "success";
+                                                        }
+                                                        <tr class="@selectedRow">
+                                                            <td>
+                                                                @item.TicketTitle
+                                                            </td>
+                                                            <td>
+                                                                <!--item.Submitter-->
+                                                                <!--{
+                                                                    foreach (var sub in item.Enrollments)
+                                                                    {
+                                                                        sub.User.FullName <br />
+                                                                    }
+                                                                }-->
+                                                                @item.Submitter <br />
+                                                            </td>
+                                                            <td>
+                                                                <!--item.Developers.Count()-->
+                                                                @{
+                                                                    foreach (var dev in item.Developers)
+                                                                    {
+                                                                        @dev.FullName <br />
+                                                                    }
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @item.TicketStatus
+                                                            </td>
+                                                            <td>
+                                                                @item.Created
+                                                            </td>
+                                                            <td>
+                                                                <!--Html.ActionLink("Select","Details", new { ticketID = item.TicketID })-->
+                                                                <!--Html.ActionLink("Select", "Ticket", new { id = item.TicketID }, null)-->
+                                                                <a href="@Url.Action("Details", "Ticket", new { id = item.TicketID }, null)" class="btn btn-primary btn-lg">Select</a>
+                                                                <!--<a href="Url.Action("Details", "Ticket")" class="btn btn-primary btn-lg">Select</a>-->
+                                                                <!--<a href="Url.Action("Details", "Ticket")" class="btn btn-primary btn-lg">Select</a>-->
+                                                                <!--<script>
+                                                                    function selectedTicket() {
+                                                                        $.ajax({
+                                                                            type: "POST",
+                                                                            url: "/Ticket/Details/" + item,
+                                                                            async: true,
+                                                                            success: function (msg) {
+                                                                                ServiceSucceeded(msg);
+                                                                            },
+                                                                            error: function () {
+                                                                                return "error";
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                </script>-->
+                                                                <!--Html.ActionLink("Select", "Ticket", "Details", new { ticketID = item.TicketID })-->
+                                                                <!--Html.ActionLink("Select", "~/Ticket/Details", new { ticketID = item.TicketID })-->
+                                                                <!--Html.ActionLink("Select", "/Ticket/Details", new { ticketID = item.TicketID })-->
+                                                                <!--<a href="/Ticket/Details" itemid="{ticketID}">Select</a>-->
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </table>
+                                                <!-- Grab the selected ticket from the table above and fulfill request below -->
+                                                @if (Model.Tickets != null)
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    <!--<h3>Ticket Details Expanded for Clicked Project Ticket</h3>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>TicketID</th>
+                                                            <th>Ticket TitleTitle</th>
+                                                            <th>Ticket Description</th>
+                                                            <th>Assigned Developer</th>
+                                                            <th>Submitter</th>
+                                                            <th>Project Name</th>
+                                                            <th>Ticket Priority</th>
+                                                            <th>Ticket Status</th>
+                                                            <th>Ticket Type</th>
+                                                            <th>Created</th>
+                                                            <th>Updated</th>
+                                                        </tr>
+
+
+
+                                                    </table>-->
+                                                }
+
+
+
+
+
+                                                <!--<div class="card-body">
+
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ./Bottom-Right Card -->
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

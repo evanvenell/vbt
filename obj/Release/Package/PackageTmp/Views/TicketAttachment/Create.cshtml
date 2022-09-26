@@ -1,0 +1,153 @@
+﻿@model BugTrackerApplication.Models.TicketAttachments
+
+@{
+    ViewBag.Title = "Create Attachment";
+}
+<!-- Custom CSS for File Uploade-->
+<style type="text/css">
+    .FileUpload-row {
+        display: grid;
+        grid-column-gap: 25px;
+        grid-row-gap: 20px;
+        grid-template-columns: auto auto auto auto;
+        grid-column: start end;
+        background-color: transparent;
+        padding: 0;
+    }
+
+    .FileUpload-item-title {
+        /*background-color: rgba(255, 255, 255, 0.8);*/
+        /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+        padding: 7px;
+        /*font-size: 30px;*/
+        /*font-size: 21px;*/
+        text-align: left;
+    }
+
+    .FileUpload-item-text {
+        /*background-color: rgba(255, 255, 255, 0.8);*/
+        /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+        padding: 5px;
+        /*font-size: 30px;*/
+        font-size: 17px;
+        text-align: center;
+    }
+</style>
+<!-- ./Custom CSS for FileUpload -->
+<h2>Add an Attachment</h2>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-7">
+
+                <div class="card">
+                    <div class="card-primary">
+                        <div class="card-header">
+                            <h3 class="card-text">Upload an Attachment</h3>
+                        </div>
+                        <div class="card-body">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    <h4>Ticket Attachment</h4>
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="FileUpload-row">
+                                    <div class="form-group">
+                                        <div class="FileUpload-item-title">
+                                            @Html.LabelFor(model => model.TicketID, "TicketID:", htmlAttributes: new { @class = "control-label col-md-5" })
+                                        </div>
+                                        <div class="FileUpload-item-text">
+                                            <div class="col-md-10" style="padding-left: 20px;">
+                                                @Html.Editor("TicketID", new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                @Html.ValidationMessageFor(model => model.TicketID, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="padding-left: 40px;">
+                                        <div class="FileUpload-item-title">
+                                            @Html.LabelFor(model => model.FileName, "File:", htmlAttributes: new { @class = "control-label col-md-4" })
+                                        </div>
+                                        <div class="FileUpload-item-text">
+                                            <div class="col-md-10" style="padding-left: 20px;">
+                                                @*<input name="FileUpload" id="fileUpload" type="file" class="btn btn-default" />*@
+                                                @using (Html.BeginForm("Create", "TicketAttachment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                {
+                                                    <input type="file" name="files" />
+                                                    <input type="submit" value="OK" />
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="FileUpload-row">
+                                    <div class="form-group">
+                                        <div class="FileUpload-item-title">
+                                            @Html.LabelFor(model => model.Author, "Added By:", htmlAttributes: new { @class = "control-label col-md-4" })
+                                        </div>
+                                        <div class="FileUpload-item-text">
+                                            <div class="col-md-10" style="padding-left: 20px;">
+                                                @Html.Editor("AuthorID", new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="FileUpload-item-title">
+                                            @Html.LabelFor(model => model.FileName, "FileName:", htmlAttributes: new { @class = "control-label col-md-4" })
+                                        </div>
+                                        <div class="FileUpload-item-text">
+                                            <div class="col-md-12" style="padding-left: 20px;">
+                                                @Html.Editor("FileName", new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                                @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    @*<div class="FileUpload-row">
+                                        <div class="form-group">
+                                            <div class="FileUpload-item-title">
+                                                @Html.LabelFor(model => model.Uploaded, "Date Uploaded:", htmlAttributes: new { @class = "control-label col-md-9" })
+                                            </div>
+                                            <div class="FileUpload-item-text">
+                                                <div class="col-md-10" style="padding-left: 20px;">
+                                                    
+                                                    @Html.EditorFor(model => model.Uploaded, new { htmlAttributes = new { @class = "form-control", @disabled = true } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <div class="form-actions accent-maroon">
+                                                @*<a href="@Url.Action("Details", "Ticket", new { id = Model.TicketID }, null)" class="btn btn-primary btn-lg">Cancel</a>*@
+                                                <input type="submit" value="Save" class="btn btn-lg btn-primary" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+
+                                    @*<div class="form-group">
+                                            @Html.LabelFor(model => model., htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>*@
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

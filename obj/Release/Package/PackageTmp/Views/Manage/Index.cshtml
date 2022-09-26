@@ -1,0 +1,258 @@
+﻿@model BugTrackerApplication.Models.IndexViewModel
+
+<!-- NOTE: Leaving the model blank at the top reverts the page to loa dto login and then redirect to this page...-->
+@{
+    ViewBag.Title = "UserProfile";
+}
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // When a tab is clicked
+        $('li[data-tab]').click(function () {
+            // Hide all content tabs
+            $('.tab-content').hide();
+            // Ensure no tabs are active
+            $('li[data-tab]').removeClass('active');
+            // Activate this tab
+            $(this).addClass('active');
+            // Show the tab that cooresponds to this one
+            $('.tab-content[data-tab="' + $(this).data('tab') + '"]').show();
+        });
+
+        // Initialize the page with the first tab
+        $('li[data-tab]:first').click();
+    });
+</script>
+
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Profile</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">User Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Profile Image -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            @using Microsoft.AspNet.Identity 
+                            @*<img class="profile-user-img img-fluid img-circle" src="@Url.Action("Photo", "Manage", new { UserId = User.Identity.GetUserId() })" alt="User profile picture" />*@
+                            <img class="profile-user-img img-fluid img-circle" src="@Url.Action("Photo", "Manage", new { UserId = User.Identity.GetUserId() })" alt="User profile picture" style="width: 100px; height: 100px;"/>
+                            
+
+                        </div>
+                        <!--<h3 class="profile-username text-center">Html.DisplayFor(m => m.FullName)</h3>-->
+                        <h3 class="profile-username text-center">@Html.DisplayFor(m => m.FirstName) @Html.DisplayFor(m => m.LastName)</h3>
+                        <p class="text-muted text-center">@Html.DisplayFor(m => m.JobTitle)</p>
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Projects: </b>
+                                <!--<a class="float-right">Html.ViewBag.Comments</a>-->
+                                <a class="float-right">@Html.DisplayFor(m => m.AssociatedProjects)</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Tickets: </b>
+                                <a class="float-right">@Html.DisplayFor(m => m.AssociatedTickets)</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Comments: </b>
+                                <a class="float-right">@Html.DisplayFor(m => m.AssociatedComments)</a>
+                            </li>
+                        </ul>
+                        <!-- Email/Instant Message another employee or submitter ...WIll add this later on. -->
+                        <a href="#" class="btn btn-primary btn-block">
+                            <b>Send Message</b>
+
+                        </a>
+                        <p style="font-size: 10px;">-- ^Currently in Development^ --</p>
+                    </div>
+                    <!-- ./card-body -->
+                </div>
+                <!-- ./card -->
+                <!-- About Me Box -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            About Me
+                        </h3>
+                    </div>
+                    <!-- ./card-header -->
+                    <div class="card-body">
+                        <!--<strong>
+                            <i class="fas fa-user-check mr-1"></i>
+                            Assigned Role(s)
+                        </strong>
+                        <p class="text-muted">
+                            string.Join(" , ", Model.AssignedRole.ToList())
+                                <!--string.Join(" , ", item.Roles.ToList());
+
+                            
+                        </p>
+                        <hr />-->
+
+                        <strong>
+                            <i class="fas fa-book mr-1"></i>
+                            Education or Experience
+                        </strong>
+                        <p class="text-muted">
+                            @Html.DisplayFor(m => m.EducationOrExperience)
+                        </p>
+                        <hr />
+
+                        <strong>
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            Location
+                        </strong>
+                        <p class="text-muted">
+                            @Html.DisplayFor(m => m.Location)
+                        </p>
+                        <hr />
+
+                        <strong>
+                            <i class="fas fa-code-branch mr-1"></i>
+                            Skills
+                        </strong>
+                        <p class="text-muted">
+                            @Html.DisplayFor(m => m.Skills)
+                        </p>
+                        <hr />
+
+                        <strong>
+                            <i class="fas fa-file-alt mr-1"></i>
+                            Notes
+                        </strong>
+                        <p class="text-muted">
+                            @Html.DisplayFor(m => m.Notes)
+                        </p>
+                    </div>
+                    <!-- ./card-body -->
+                </div>
+                <!-- ./card -->
+            </div>
+            <!-- ./col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul id='tabs' class="nav nav-pills">
+                            <li data-tab='activity' class="nav-link">
+                                Activity
+                            </li>
+                            <li data-tab='timeline' class="nav-link">
+                                Timeline
+                            </li>
+                            <li data-tab='settings' class="nav-link">
+                                Settings
+                            </li>
+                            <li data-tab='appprofilesettings' class="nav-link">
+                                Profile
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <div class="tab-content" data-tab="activity">
+                                <!-- Activity Pane -->
+                                <!-- ./Activity Pane-->
+                            </div>
+                            <div class="tab-content" data-tab="timeline">
+                                <!-- Timeline Pane -->
+                                <!-- ./Timeline Pane-->
+                            </div>
+                            <div class="tab-content" data-tab="settings">
+                                <!-- Settings Pane -->
+                                <div class="form-horizontal">
+                                    @Html.Partial("_UserSettingsPartial")
+
+                                    
+                                </div>
+
+                                <!-- ./Settings Pane-->
+                            </div>
+                            <div class="tab-content" data-tab="appprofilesettings">
+                                <div class="form-horizontal">
+                                    @Html.Partial("_ProfileSettingsPartial")
+
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- ./card-body -->
+                        @*<ul id='tabs' class="nav nav-pills">
+                                <li data-tab='a' class="nav-link">Tab A</li>
+                                <li data-tab='b'>Tab B</li>
+                                <li data-tab='c'>Tab C</li>
+                                <li data-tab='d'>Tab D</li>
+                            </ul>
+                            <div>
+                                <div class='tab-content' data-tab='a'>
+                                    <h1>Tab A</h1>
+                                </div>
+                                <div class='tab-content' data-tab='b'>
+                                    <h1>Tab B</h1>
+                                </div>
+                                <div class='tab-content' data-tab='c'>
+                                    <h1>Tab C</h1>
+                                </div>
+                                <div class='tab-content' data-tab='d'>
+                                    <h1>Tab D</h1>
+                                </div>
+                            </div>*@
+                    </div>
+                    <!-- ./card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane" id="activity">
+
+                            </div>
+                            <!-- ./tab-pane -->
+                            <div class="tab-pane" id="timeline">
+
+                            </div>
+                            <!-- ./tab-pane -->
+                            <div class="tab-pane" id="settings">
+                                <form class="form-horizontal">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            @Html.EditorFor(model => model.FullName, new { htmlattributes = new { @class = "control-label col-md-2", @placeholder = "Name" } })
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="developersettings">
+                                <form class="form-horizontal">
+                                    @using (Html.BeginForm("Create", "Developer"))
+                                    {
+                                    }
+                                </form>
+                            </div>
+                            <!-- ./tab-pane -->
+                            <!-- ./tab-pane -->
+                        </div>
+                    </div>
+                </div>
+                <!-- ./card -->
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- ./row -->
+    </div>
+    <!-- ./container-fluid -->
+</div>
+<!-- ./content -->

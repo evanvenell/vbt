@@ -1,0 +1,456 @@
+﻿@model BugTrackerApplication.Models.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!-- Content Header (Page Header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row md-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-size: 40px; text-align: left;">Ticket Details</h1>
+                <!-- May add more detail here such as the clicked ticket ID next to the "Ticket Details" header element -->
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="/Home/Index">Dashboard Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="/Ticket/Index">My Tickets</a>
+                    </li>
+                    <li class="breadcrumb-item active">Ticket Details</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+<!-- Custom CSS for Line spacer -->
+<style type="text/css">
+    .line {
+        width: inherit;
+        height: 5px;
+        border-bottom: 1px solid black;
+        position: center;
+    }
+
+    .verticalLine {
+        width: 1px;
+        height: inherit;
+        border-left: 1px solid black;
+        position: center;
+    }
+</style>
+<!-- ./Custom CSS for Line Spacer -->
+<!-- Custom CSS for Ticket Stats-->
+<style type="text/css">
+    .TicketStat-row {
+        display: grid;
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+        grid-template-columns: auto auto;
+        background-color: transparent;
+        padding: 10px;
+    }
+
+    .TicketStat-item-title {
+        /*background-color: rgba(255, 255, 255, 0.8);*/
+        /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+        padding: 10px;
+        /*font-size: 30px;*/
+        /*font-size: 21px;*/
+        text-align: left;
+    }
+
+    .TicketStat-item-text {
+        /*background-color: rgba(255, 255, 255, 0.8);*/
+        /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+        padding: 10px;
+        /*font-size: 30px;*/
+        font-size: 17px;
+        text-align: center;
+    }
+</style>
+<!-- ./Custom CSS for Ticket Stats -->
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-primary">
+                        <!--<div class="card-header">
+                        <h3 class="card-text">Details about this Ticket</h3>
+                    </div>-->
+                        <div class="card-header" style="background-color: #ffc107">
+                            <h4 class="card-text">Details for Ticket @Html.DisplayFor(model => model.TicketID) </h4>
+                            <h6>
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.TicketID })   |
+                                @Html.ActionLink("Back to Tickets", "Index")
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" style="padding-bottom: 15px;">
+                                <div class="col-lg-3">
+                                    <h6><strong>Ticket Title: </strong></h6>
+                                </div>
+                                <div class="col-lg-12" style="padding-left: 15px;">
+                                    @Html.DisplayFor(m => m.TicketTitle)
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-bottom: 5px;">
+                                <div class="col-lg-3">
+                                    <h6><strong>Description: </strong></h6>
+                                </div>
+                                <div class="col-lg-12" style="padding-left: 15px;">
+                                    @Html.DisplayFor(m => m.TicketDescription)
+                                </div>
+                            </div>
+
+                            <!-- Line Spacer -->
+                            <div class="line" style="padding-top: 5px; padding-bottom: 10px;"></div>
+                            <!-- ./Line Spacer-->
+
+                            <div class="row TicketStat-row" style="padding-bottom: 10px; padding-top: 20px;">
+                                <div class="col-lg-9 TicketStat-item">
+                                    <h6><strong>Current Status: </strong></h6>
+                                    @if (Model.TicketStatus == BugTrackerApplication.Models.TicketStatus.New)
+                                    {
+                                        <div class="callout callout-warning" style="text-align: center;">
+                                            @Html.DisplayFor(m => m.TicketStatus)
+                                        </div>
+                                    }
+                                    @if (Model.TicketStatus == BugTrackerApplication.Models.TicketStatus.InProgress)
+                                    {
+                                        <div class="callout callout-warning" style="text-align: center;">
+                                            @Html.DisplayFor(m => m.TicketStatus)
+                                        </div>
+                                    }
+                                    @if (Model.TicketStatus == BugTrackerApplication.Models.TicketStatus.RequestedInfo)
+                                    {
+                                        <div class="callout callout-info" style="text-align: center;">
+                                            @Html.DisplayFor(m => m.TicketStatus)
+                                        </div>
+                                    }
+                                    @if (Model.TicketStatus == BugTrackerApplication.Models.TicketStatus.Scheduled)
+                                    {
+                                        <div class="callout callout-info" style="text-align: center;">
+                                            @Html.DisplayFor(m => m.TicketStatus)
+                                        </div>
+                                    }
+                                    @if (Model.TicketStatus == BugTrackerApplication.Models.TicketStatus.WaitingOnUser)
+                                    {
+                                        <div class="callout callout-info" style="text-align: center;">
+                                            @Html.DisplayFor(m => m.TicketStatus)
+                                        </div>
+                                    }
+                                    @if (Model.TicketStatus == BugTrackerApplication.Models.TicketStatus.Cancelled)
+                                    {
+                                        <div class="callout callout-null" style="text-align: center;">
+                                            @Html.DisplayFor(m => m.TicketStatus)
+                                        </div>
+                                    }
+                                    @if (Model.TicketStatus == BugTrackerApplication.Models.TicketStatus.Closed)
+                                    {
+                                        <div class="callout callout-success" style="text-align: center;">
+                                            @Html.DisplayFor(m => m.TicketStatus)
+                                        </div>
+                                    }
+                                    @if (Model.TicketStatus == BugTrackerApplication.Models.TicketStatus.Escalation)
+                                    {
+                                        <div class="callout callout-danger" style="text-align: center;">
+                                            @Html.DisplayFor(m => m.TicketStatus)
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="col-lg-12 TicketStat-item">
+                                    <h6><strong>Ticket Type: </strong></h6>
+                                    @if (Model.TicketType == BugTrackerApplication.Models.TicketType.Bugs)
+                                    {
+                                        <div class="callout callout-danger">
+                                            @Html.DisplayFor(m => m.TicketType)
+                                        </div>
+                                    }
+                                    @if (Model.TicketType == BugTrackerApplication.Models.TicketType.Errors)
+                                    {
+                                        <div class="callout callout-danger">
+                                            @Html.DisplayFor(m => m.TicketType)
+                                        </div>
+                                    }
+                                    @if (Model.TicketType == BugTrackerApplication.Models.TicketType.FeatureRequest)
+                                    {
+                                        <div class="callout callout-warning">
+                                            @Html.DisplayFor(m => m.TicketType)
+                                        </div>
+                                    }
+                                    @if (Model.TicketType == BugTrackerApplication.Models.TicketType.OtherComments)
+                                    {
+                                        <div class="callout callout-info">
+                                            @Html.DisplayFor(m => m.TicketType)
+                                        </div>
+                                    }
+                                    @if (Model.TicketType == BugTrackerApplication.Models.TicketType.TrainingDocumentRequests)
+                                    {
+                                        <div class="callout callout-info">
+                                            @Html.DisplayFor(m => m.TicketType)
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="col-lg-9 TicketStat-item">
+                                    <h6><strong>Ticket Priority: </strong></h6>
+                                    @if (Model.TicketPriority == BugTrackerApplication.Models.TicketPriority.Low)
+                                    {
+                                        <div class="callout callout-info" style="text-align: center; ">
+                                            @Html.DisplayFor(m => m.TicketPriority)
+                                        </div>
+                                    }
+                                    @if (Model.TicketPriority == BugTrackerApplication.Models.TicketPriority.Medium)
+                                    {
+                                        <div class="callout callout-warning" style="text-align: center; ">
+                                            @Html.DisplayFor(m => m.TicketPriority)
+                                        </div>
+                                    }
+                                    @if (Model.TicketPriority == BugTrackerApplication.Models.TicketPriority.High)
+                                    {
+                                        <div class="callout callout-danger" style="text-align: center; ">
+                                            @Html.DisplayFor(m => m.TicketPriority)
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+
+                            <!-- Line Spacer -->
+                            <div class="line" style="padding-top: 5px; padding-bottom: 10px;"></div>
+                            <!-- ./Line Spacer-->
+
+                            <div class="row" style="padding-top: 5px; padding-bottom: 10px;">
+                                <div class="col-lg-5">
+                                    <h6><strong>Associated Project Name: </strong></h6>
+                                </div>
+                                <div class="col-lg-12" style="padding-left: 15px;">
+                                    @Html.DisplayFor(m => m.Project.ProjectName)
+                                </div>
+                            </div>
+                            <!-- Line Spacer -->
+                            <div class="line" style="padding-top: 5px; padding-bottom: 10px;"></div>
+                            <!-- ./Line Spacer-->
+
+                            <div class="row TicketStat-row" style="padding-top: 20px;">
+                                <div class="col-lg-9 TicketStat-item">
+                                    <h6><strong>Created Date: </strong></h6>
+                                    <p style="padding-left: 15px;">
+                                        @Html.DisplayFor(m => m.Created)
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-9 TicketStat-item">
+                                    <h6><strong>Updated Date: </strong></h6>
+                                    <p style="padding-left: 15px;">
+                                        @Html.DisplayFor(m => m.Updated)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Hand Column -->
+            @*<div class="col-lg-6" style=" padding-left: 60px;">*@
+            <div class="col-lg-6" style=" padding-left: 25px;">
+                <!-- Add a Comment to Ticket - Section -->
+                <div class="row">
+                    <!--<div class="col-lg-12">
+                <div class="card">
+                    <div class="card-primary">
+                        <div class="card-header">
+                            <h4 class="card-text">Resources & Meetings</h4>
+                            <h6>
+                                Html.ActionLink("Assign Me", "Developer", "Edit", new { id = Model.TicketID })
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row" style="padding-bottom: 15px;">
+                                <div class="col-lg-3">
+                                    <h6><strong>Assigned Developers</strong></h6>
+                                </div>
+                                <div class="col-lg-12" style="padding-left: 15px;">
+                                    <table>
+                                        <tr>-->
+                    @*@{
+                        int cnt = 0;
+                        List<BugTrackerApplication.ViewModels.AssignedTicketDevelopers> developers = ViewBag.TicketDevelopers;
+
+                        foreach (var developer in developers)
+                        {
+                            if (cnt++ % 3 == 0)
+                            {
+                                @:</tr><tr>
+                            }
+                            @:<td>
+                                @developer.FullName
+                            @:</td>
+                        }
+                    }*@
+                    <!--</tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-primary">
+                                @*<div class="card-header" style="background-color: #F8F8FF">*@
+                                <div class="card-header" style="padding-bottom: 5px; background-color: #ffc107;">
+                                    <h4 class="card-text">Add a Comment?</h4>
+                                    <h6 class="card-text">Add a new Comment to this Ticket</h6>
+                                </div>
+                                <div class="card-body">
+                                    @using (Html.BeginForm())
+                                    {
+                                        <p>
+                                            <!--<input class="form-control form-control-lg" type="text" placeholder="Add a Comment to this Ticket here."-->
+                                            <!--Html.TextBox("commentSearch", ViewBag.CommentFilter as string)-->
+                                            <!--<input type="submit" value="Add" />-->
+                                            <!--<h4 class="card-text" style="color: #343a40">Click the button below to Add a Comment to this Ticket</h4>-->
+                                            <a href="@Url.Action("Create", "Comment", new { addComment = ViewBag.AddComment })" class="btn btn-primary btn-lg">Add Comment</a>
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ./Add a Comment to Ticket - Section -->
+                <!-- Ticket Comments Section -->
+                <div class="row">
+                    <div class="card">
+                        <div class="card-primary">
+                            <div class="card-header" style="background-color: #ffc107">
+                                <h4 class="card-text">Ticket Comments</h4>
+                                <h6 class="card-text" style="padding-left: 5px;">All comments for this Ticket</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- Entry Result DIsplay Modifier -->
+                                    <!--</div>-->
+                                    <div class="col-lg-10" style="padding-left: 300px;">
+                                        @using (Html.BeginForm())
+                                        {
+                                            <p>
+                                                Search: @Html.TextBox("commentSearch", ViewBag.CurrentFilter as string)
+                                                <input type="submit" value="Search" />
+                                            </p>
+                                        }
+
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <table class="table">
+                                            <tr>
+                                                <th>Commenter</th>
+                                                <th>Message</th>
+                                                <th>Created</th>
+                                            </tr>
+
+                                            @foreach (var item in Model.Comments)
+                                            {
+
+                                                string selectedRow = "";
+                                                if (item.TicketID == ViewBag.CommentID)
+                                                {
+                                                    selectedRow = "success";
+                                                }
+                                                <tr class="@selectedRow">
+                                                    <td>
+                                                        @{
+                                                            @item.Commenter <br />
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        @{
+                                                            @item.Message <br />
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        @{
+                                                            @item.Created <br />
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <!-- Ability to view these controls is dependent on the users role who is currently logged in -->
+                                                        <a href="@Url.Action("Details", "Comment", new { id = item.ID }, null)" class="btn btn-primary btn-sm">Select</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </table>
+
+                                        <!--<dl class="dl-horizontal">
+                                        <dt>
+                                            Html.DisplayNameFor()
+                                        </dt>
+                                    </dl>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./Ticket Comments Section -->
+            </div>
+        </div>
+
+        <!-- Line Spacer -->
+        <div class="line" style="padding-top: 5px; padding-bottom: 10px;"></div>
+        <!-- ./Line Spacer -->
+        <!-- Custom CSS for File Uploade-->
+        <style type="text/css">
+            .FileUpload-row {
+                display: grid;
+                grid-column-gap: 0px;
+                grid-row-gap: 20px;
+                grid-template-columns: auto auto auto auto;
+                grid-column: start end;
+                background-color: transparent;
+                padding: 0;
+            }
+
+            .FileUpload-item-title {
+                /*background-color: rgba(255, 255, 255, 0.8);*/
+                /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+                padding: 7px;
+                /*font-size: 30px;*/
+                /*font-size: 21px;*/
+                text-align: left;
+            }
+
+            .FileUpload-item-text {
+                /*background-color: rgba(255, 255, 255, 0.8);*/
+                /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+                padding: 5px;
+                /*font-size: 30px;*/
+                font-size: 17px;
+                text-align: center;
+            }
+        </style>
+        <!-- ./Custom CSS for FileUpload -->
+        <!-- File Uploads for Ticket -->
+        <!-- Paste in from Notepad -->
+
+       
+        
+    </div>
+</div>
